@@ -53,6 +53,9 @@ class Changelog < Padrino::Application
           result = page.read
         end
       end
+
+      result = 'initChangelog(' + result + ');'
+      
     rescue
       result = $!.message
     end

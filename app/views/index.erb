@@ -39,8 +39,8 @@
 <script src="javascripts/app.js"></script>
 <script>
 	var loc = document.location;
-	var default_source = loc.protocol + '//' + loc.host + '/source.js';
-    var s = loc.search.match(/source=(https?[^?]+\.js$)/);
+	var default_source = 'https://raw.github.com/gist/3292203/8f707703b52ea586c3c07a28c6e4130c8ae35ed9/source.json';
+    var s = loc.search.match(/source=(https?[^?]+\.json$)/);
 
     if (!s || s.length < 2) {
      	loc.href = loc.protocol + '//' + loc.host + '/?source=' + encodeURIComponent(default_source);
@@ -49,7 +49,7 @@
     }
 </script>
 <script>
-	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	var _gaq=[['_setAccount','UA-33971089-1'],['_trackPageview']];
 	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 	s.parentNode.insertBefore(g,s)}(document,'script'));
