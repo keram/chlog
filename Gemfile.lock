@@ -69,7 +69,6 @@ GEM
       tilt (~> 1.3, >= 1.3.3)
     sinatra-flash (0.3.0)
       sinatra (>= 1.0.0)
-    sqlite3 (1.3.6)
     thin (1.4.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -95,5 +94,4 @@ DEPENDENCIES
   rspec
   sequel
   sinatra-flash
-  sqlite3
   thin
