@@ -11,7 +11,7 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
 gem 'erubis', "~> 2.7.0"
-gem 'sqlite3'
+# gem 'sqlite3'
 gem 'sequel'
 gem 'redcarpet'
 gem 'nokogiri'
