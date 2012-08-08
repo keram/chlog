@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="stylesheets/style.css">
+
+	<script src="javascripts/changelog.js"></script>
+</head>
+<body>
+<header>
+	<h1 id="logo">Changelog initialization..</h1>
+</header>
+<noscript style="border: solid 3px red; padding: 16px; background: #fafcfe; display: block; margin: 0px 16px;">
+	Javascript needed.
+</noscript>
+<div role="main">
+	<aside id="sidebar">
+		<div id="sidebar-content">
+
+		</div>
+	</aside>
+	<section id="main">
+		<div id="main-content">
+			<%= render 'guide' %>
+		</div>
+	</section>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="javascripts/libs/jquery-1.7.2.min.js"><\/script>')</script>
+
+<script src="javascripts/app.js"></script>
+<script>
+	var loc = document.location;
+	var default_source = loc.protocol + '//' + loc.host + '/source.js';
+    var s = loc.search.match(/source=(https?[^?]+\.js$)/);
+
+    if (!s || s.length < 2) {
+     	loc.href = loc.protocol + '//' + loc.host + '/?source=' + encodeURIComponent(default_source);
+    } else {
+    	document.write('<script src="/sp?url=' + decodeURIComponent(s[1]) + '"><\/script>');
+    }
+</script>
+<script>
+	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
