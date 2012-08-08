@@ -6,14 +6,14 @@
 		source : {},
 
 		self_project : {
-			"title" : "Changelog",
-			"url" : "http://localhost/work/keramovo/changelog/html/",
-			"web" : "/",
-			"repository" : "https://github.com/keram/changelog/",
+			"title" : "Changelog App",
+			"url" : "https://github.com/keram/chlog/changelog.md",
+			"web" : "http://chlog.herokuapp.com/",
+			"repository" : "https://github.com/keram/chlog/",
 			"branches" : [
 				{
 					"title" : "master",
-					"url" : "https://github.com/keram/changelog/commits/master"
+					"url" : "https://github.com/keram/chlog/commits/master"
 				}
 			]
 		},
