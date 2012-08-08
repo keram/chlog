@@ -6,8 +6,8 @@
 		source : {},
 
 		self_project : {
-			"title" : "Changelog App",
-			"url" : "https://github.com/keram/chlog/changelog.md",
+			"title" : "Changelog",
+			"url" : "https://raw.github.com/keram/chlog/master/changelog.md",
 			"web" : "http://chlog.herokuapp.com/",
 			"repository" : "https://github.com/keram/chlog/",
 			"branches" : [
