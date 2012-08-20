@@ -164,6 +164,14 @@ article h1 {
   padding-top: 0px;
 }
 
+.loading {
+  background: url(/images/loading.gif) no-repeat top left;
+}
+
+.loading * {
+  visibility: hidden;
+}
+
 /* =============================================================================
    Media Queries
    ========================================================================== */

@@ -17,6 +17,8 @@ $().ready(function () {
 		if (is_primary) {
 			e.preventDefault();
 			e.stopPropagation();
+			main.addClass('loading');
+
 			url += '?url=' + encodeURIComponent(href);
 			$.ajax({
 				type: 'GET',
@@ -24,11 +26,13 @@ $().ready(function () {
 				dataType: 'text',
 				error: function (r) {
 					console.log(r);
+					main.removeClass('loading');
 				},
 				success: function (data) {
 					if (data) {
 						main.html(data);
-					}							
+					}
+					main.removeClass('loading');
 				}
 			});
 

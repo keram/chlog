@@ -28,7 +28,7 @@
 		</div>
 	</aside>
 	<section id="main">
-		<div id="main-content">
+		<div id="main-content" >
 			<%= render 'guide' %>
 		</div>
 	</section>
@@ -37,9 +37,11 @@
 <script>window.jQuery || document.write('<script src="javascripts/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
 <script src="javascripts/app.js"></script>
+<% default_source = PADRINO_ENV == 'production' ? 'https://raw.github.com/gist/3292203/23befc80e0fba147b6dc74bc5c63bec6b42a7cbf/source.json' : 'http://localhost:3000/source.json' %>
+
 <script>
 	var loc = document.location;
-	var default_source = 'https://raw.github.com/gist/3292203/23befc80e0fba147b6dc74bc5c63bec6b42a7cbf/source.json';
+	var default_source = '<%= default_source %>';
     var s = loc.search.match(/source=(https?[^?]+\.json$)/);
 
     if (!s || s.length < 2) {
