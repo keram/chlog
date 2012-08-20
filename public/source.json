@@ -1,0 +1,29 @@
+{
+	"author" : "@marek_public",
+	"title" : "Dev Changelog",
+	"url" : "http://localhost",
+	"projects" : [
+		{
+			"title" : "Ruby on Rails",
+			"url" : "http://weblog.rubyonrails.org/",
+			"web" : "http://rubyonrails.org/",
+			"guide" : "http://guides.rubyonrails.org/",
+			"download" : "http://rubyonrails.org/download",
+			"repository" : "https://github.com/rails/rails/",
+			"branches" : [
+				{
+					"title" : "master",
+					"url" : "https://github.com/rails/rails/commits/master"
+				},
+				{
+					"title" : "3-2-stable",
+					"url" : "https://github.com/rails/rails/commits/3-2-stable"
+				}
+			]
+		}, {
+			"title" : "PHP",
+			"url" : "http://php.net/ChangeLog-5.php",
+			"web" : "http://php.net/"
+		}
+	]
+}
