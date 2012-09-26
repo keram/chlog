@@ -24,16 +24,17 @@ class Changelog < Padrino::Application
 
       timeout(5) do
         response = open(uri, cfg)
-
         case
         when url =~ /\.(md|MD|txt)$/
           result = markdown.render(response.read)
-        when url =~ /\.(xml|rss)$/
-          rss = SimpleRSS.parse response.read
-          result += %Q{<h2><a href="#{rss.feed.link}">#{strip_tags(rss.feed.title)}</a></h2>}
-          (rss.entries || rss.items).each do |entry|
+        when response.content_type =~ /(rss|xml)/
+          feed = FeedMe.parse response.read
+          link = feed.url || feed.link
+          result += %Q{<h2><a href="#{link}">#{strip_tags(feed.title)}</a></h2>}
+          feed.entries.each do |entry|
+            link = entry.url
             result += '<div>'
-            result += %Q{<h3><a href="#{entry.link}">#{strip_tags(entry.title)}</a></h3>}
+            result += %Q{<h3><a href="#{link}">#{strip_tags(entry.title)}</a></h3>}
             result += %Q{<div>#{markdown.render(strip_tags(entry.content || entry.description || ''))}</div>}
             result += '</div>'
           end

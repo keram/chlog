@@ -15,8 +15,9 @@ gem 'erubis', "~> 2.7.0"
 # gem 'sequel'
 gem 'redcarpet'
 gem 'nokogiri'
-gem 'simple-rss'
+gem 'feed_me'
 gem 'faraday'
+gem 'simple-rss'
 # gem 'feedzirra'
 
 # Test requirements
