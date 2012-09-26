@@ -5,36 +5,44 @@ require 'open-uri'
 
 class Changelog < Padrino::Application
   register Padrino::Rendering
-  register Padrino::Mailer
   register Padrino::Helpers
 
   get '/' do
-
     render :index
   end
 
   get '/proxy' do
     result = ''
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    url = params[:url].to_s.gsub(/\n/, '')
 
-    if url =~ /\.(md|MD|txt)$/
-      begin
-        timeout(5) do
-          uri = URI.parse(url)
-          cfg = {}
-          cfg[:ssl_verify_mode] = OpenSSL::SSL::VERIFY_NONE if url =~ /^https/
+    begin
+      url = params[:url].to_s.gsub(/\s/, '')
+      uri = URI.parse(url)
+      cfg = {}
+      # bad bad bad
+      cfg[:ssl_verify_mode] = OpenSSL::SSL::VERIFY_NONE if url =~ /^https/
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 
-          open(uri, cfg) do |page|
-            result = markdown.render(page.read) 
+      timeout(5) do
+        response = open(uri, cfg)
+
+        case
+        when url =~ /\.(md|MD|txt)$/
+          result = markdown.render(response.read)
+        when url =~ /\.(xml|rss)$/
+          rss = SimpleRSS.parse response.read
+          result += %Q{<h2><a href="#{rss.feed.link}">#{strip_tags(rss.feed.title)}</a></h2>}
+          (rss.entries || rss.items).each do |entry|
+            result += '<div>'
+            result += %Q{<h3><a href="#{entry.link}">#{strip_tags(entry.title)}</a></h3>}
+            result += %Q{<div>#{markdown.render(strip_tags(entry.content || entry.description || ''))}</div>}
+            result += '</div>'
           end
+        else
+          result = %Q{<iframe sandbox style="border: none; width: 100%; height: 50em;" src="#{url}"></iframe>}
         end
-
-      rescue 
-        result = $!.message
       end
-    else
-      result = "<iframe sandbox style='border: none; width: 100%; height: 45em;' src=\"#{url}\"></iframe>" if url =~ /^http/
+    rescue
+      result = $!.message
     end
 
     content_type 'text/plain;charset=utf8'
@@ -43,26 +51,29 @@ class Changelog < Padrino::Application
 
   get '/sp' do
     result = ''
-    url = params[:url].to_s.gsub(/\n/, '')
     begin
-      timeout(5) do
-        uri = URI.parse(url)
-        cfg = {}
-        cfg[:ssl_verify_mode] = OpenSSL::SSL::VERIFY_NONE if url =~ /^https/
-        open(uri, cfg) do |page|
-          result = page.read
-        end
+      url = params[:url].to_s.gsub(/\s/, '')
+
+      conn = Faraday.new do |f|
+        # f.response :logger
+        f.adapter  Faraday.default_adapter
+        f.headers = { }
       end
 
-      result = 'initChangelog(' + result + ');'
-      
+      response = conn.get do |req|
+        req.url url
+        req.options[:timeout] = 5
+        req.options[:open_timeout] = 2
+      end
+
+      result = "initChangelog(#{strip_tags(response.body)});"
     rescue
       result = $!.message
     end
 
     result
   end
-  
+
   # enable :sessions
 
   ##
